@@ -1,8 +1,8 @@
 # Calendario semanal para OpenFing
 
-Propuesta de funcionalidad para [OpenFing](https://open.fing.edu.uy/): un calendario personal donde cada estudiante planifica qué clases grabadas que va a ver cada semana, ve cuáles le faltan y llega a ellas con un clic.
+Propuesta de funcionalidad para OpenFing(https://open.fing.edu.uy/): un calendario personal donde cada estudiante planifica qué clases grabadas va a ver cada semana, ve cuáles le faltan y llega a ellas con un clic.
 
-**Demo:** https://[fedeeelpz].github.io/openfing-calendario/
+**Demo:** https://fedeeelpz.github.io/openfing-calendario/
 
 ## El problema
 
@@ -60,6 +60,6 @@ Las clases con link de OpenFing pasan a **en progreso** con su minuto. Para que 
 
 ## Autoría
 
-Propuesto por [Federico Lopez], estudiante de la Facultad de Ingeniería. Me ofrezco a implementarlo en el sitio si les interesa.
+Propuesto por Federico Lopez, estudiante de la Facultad de Ingeniería. Me ofrezco a implementarlo en el sitio si les interesa.
 
 Licencia MIT (ver `LICENSE`).
