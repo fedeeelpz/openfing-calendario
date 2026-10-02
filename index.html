@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mi semana en OpenFing</title>
+<link rel="stylesheet" href="calendario.css">
+</head>
+<body>
+<main>
+<h1>Mi semana en OpenFing</h1>
+<p class="sub">Cada fila es un curso y cada columna un día. Tocá el estado de una clase para cambiarlo.</p>
+<div class="nav">
+<button class="add primary" id="open" aria-label="Agregar clase">+</button>
+<button id="prev" aria-label="Semana anterior">‹</button>
+<div class="range" id="range"></div>
+<button id="next" aria-label="Semana siguiente">›</button>
+<button id="today">Hoy</button>
+</div>
+<div class="wrap"><table id="tb"></table></div>
+<div class="leg">Estados: pendiente → en progreso (con el minuto donde quedaste) → vista.</div>
+<div class="tools">
+<button id="carry">Pasar pendientes y en progreso a la semana siguiente</button>
+<button id="exp">Copiar mi progreso</button>
+<button id="imp">Importar progreso</button>
+</div>
+<div class="msg" id="msg" role="status"></div>
+</main>
+
+<dialog id="dlg">
+<form id="f" method="dialog">
+<label>Curso<input id="course" list="courses" placeholder="Ej. PyE" required></label>
+<datalist id="courses"></datalist>
+<label>Día<select id="day"><option value="0">Lunes</option><option value="1">Martes</option><option value="2">Miércoles</option><option value="3">Jueves</option><option value="4">Viernes</option><option value="5">Sábado</option><option value="6">Domingo</option></select></label>
+<label>Nombre de la clase<input id="title" placeholder="Ej. Clase 3" required></label>
+<label>Link (opcional)<input id="url" type="url" placeholder="https://open.fing.edu.uy/..."></label>
+<div class="row"><button type="button" id="cancel">Cancelar</button><button class="primary" type="submit">Agregar</button></div>
+</form>
+</dialog>
+
+<script src="calendario.js" defer></script>
+</body>
+</html>
