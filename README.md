@@ -26,12 +26,16 @@ Una grilla semanal: cada **fila es un curso** y cada **columna un día** (L M M 
 ### Probar con el progreso real de OpenFing (opcional)
 
 OpenFing ya guarda el segundo donde quedó cada video, en claves de `localStorage` con la forma `openfing:video-progreso-reproduccion:/media/<curso>/<curso>_<NN>`. Como la demo vive en otro dominio, no puede leerlas directamente, así que se pasan a mano:(el nombre de la clave incluye comillas literales, por eso el comando las quita).
-
-1. Entrá a open.fing.edu.uy, abrí las herramientas de desarrollador (F12) y pegá en la Consola:
+1. **Guardar la duración de la clase** (una vez por clase). OpenFing guarda el progreso pero no la duración del video, y el calendario la necesita para mostrar el porcentaje y para saber si la clase se terminó:
+   ```js
+   (()=>{const m=location.pathname.match(/courses\/([^\/]+)\/(\d+)/);localStorage.setItem('openfing-duracion:'+m[1]+'/'+m[1]+'_'+m[2].padStart(2,'0'),document.querySelector('video').duration)})()
+   ```
+   Alternativa sin comandos: instalar `demo-duracion.user.js` con Tampermonkey, que lo hace solo al abrir o reproducir cada clase.
+2. **Copiar el progreso** (copia al portapapeles el progreso y las duraciones guardadas):
    ```js
    copy(JSON.stringify({p:Object.fromEntries(Object.keys(localStorage).filter(k=>k.includes('video-progreso-reproduccion:/media/')).map(k=>[k.split('/media/')[1].replace(/"/g,''),+localStorage[k]])),d:Object.fromEntries(Object.keys(localStorage).filter(k=>k.startsWith('openfing-duracion:')).map(k=>[k.slice(18),+localStorage[k]]))}))
    ```
-2. En el calendario, tocá **Importar progreso** y pegá el resultado.
+3. En el calendario, tocá **Importar progreso** y pegá el resultado.
 
 Las clases con link de OpenFing pasan a **en progreso** con su minuto. Para que pasen a **vista** hace falta conocer la duración del video, que hoy no se guarda: para la demo se puede instalar `demo-duracion.user.js` con Tampermonkey (guarda la duración de cada clase que se abre). Con duración, una clase pasa a vista al llegar al final del video, y mientras está en progreso muestra el porcentaje visto
 
