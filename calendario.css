@@ -40,3 +40,5 @@ input,select{font:inherit;padding:8px;border:1px solid var(--line);border-radius
 .row{display:flex;gap:8px;justify-content:flex-end}
 .tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .msg{color:var(--mute);font-size:.9rem;margin-top:8px;min-height:1.3em}
+
+.nb{white-space:nowrap}

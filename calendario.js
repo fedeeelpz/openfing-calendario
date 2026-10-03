@@ -16,7 +16,7 @@ const say=t=>$("msg").textContent=t;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const LBL={p:"Pendiente",e:"En progreso",v:"Vista"};
 function cell(it){
- const at=it.status==="e"&&it.at?` · min ${esc(it.at)}${it.pct!=null?" · "+it.pct+" %":""}`:"";
+ const at=it.status==="e"&&it.at?`<br><span class="nb">min ${esc(it.at)}</span>${it.pct!=null?` <span class="nb">(${it.pct} %)</span>`:""}`:"";
  const a=it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener">${it.status==="e"?"Seguir viendo":"Ver clase"}</a>`:"";
  return `<div class="cl ${it.status}"><b>${esc(it.title)}</b>${it.status==="v"?"":a}<button class="st" data-st="${it.id}" aria-label="Cambiar estado de ${esc(it.title)}">${LBL[it.status]}${at}</button><button class="st" data-del="${it.id}">Quitar</button></div>`;
 }
