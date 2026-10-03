@@ -10,7 +10,7 @@ Las clases grabadas permiten cursar a ritmo propio, pero es fácil perder el hil
 
 ## La idea
 
-Una grilla semanal: cada **fila es un curso** y cada **columna un día** (L M M J V S D). Cada celda muestra las clases planificadas para ese día, con su link directo.
+Una grilla semanal: cada **fila es un curso** y cada **columna un día** (L M M J V S D). Cada celda muestra las clases planificadas para ese día, con su link directo junto al progreso en porcentaje que se lleva de dicha clase. 
 
 - El botón **+** abre un formulario para agregar una clase (curso, día, nombre y link).
 - Cada clase tiene tres estados: **pendiente**, **en progreso** (con el minuto donde quedó el estudiante, y el link pasa a "Seguir viendo") y **vista**.
@@ -25,15 +25,15 @@ Una grilla semanal: cada **fila es un curso** y cada **columna un día** (L M M 
 
 ### Probar con el progreso real de OpenFing (opcional)
 
-OpenFing ya guarda el segundo donde quedó cada video, en claves de `localStorage` con la forma `openfing:video-progreso-reproduccion:/media/<curso>/<curso>_<NN>`. Como la demo vive en otro dominio, no puede leerlas directamente, así que se pasan a mano:
+OpenFing ya guarda el segundo donde quedó cada video, en claves de `localStorage` con la forma `openfing:video-progreso-reproduccion:/media/<curso>/<curso>_<NN>`. Como la demo vive en otro dominio, no puede leerlas directamente, así que se pasan a mano:(el nombre de la clave incluye comillas literales, por eso el comando las quita).
 
 1. Entrá a open.fing.edu.uy, abrí las herramientas de desarrollador (F12) y pegá en la Consola:
    ```js
-   copy(JSON.stringify({p:Object.fromEntries(Object.keys(localStorage).filter(k=>k.startsWith('openfing:video-progreso-reproduccion:/media/')).map(k=>[k.split('/media/')[1],+localStorage[k]])),d:Object.fromEntries(Object.keys(localStorage).filter(k=>k.startsWith('openfing-duracion:')).map(k=>[k.slice(18),+localStorage[k]]))}))
+   copy(JSON.stringify({p:Object.fromEntries(Object.keys(localStorage).filter(k=>k.includes('video-progreso-reproduccion:/media/')).map(k=>[k.split('/media/')[1].replace(/"/g,''),+localStorage[k]])),d:Object.fromEntries(Object.keys(localStorage).filter(k=>k.startsWith('openfing-duracion:')).map(k=>[k.slice(18),+localStorage[k]]))}))
    ```
 2. En el calendario, tocá **Importar progreso** y pegá el resultado.
 
-Las clases con link de OpenFing pasan a **en progreso** con su minuto. Para que pasen a **vista** hace falta conocer la duración del video, que hoy no se guarda: para la demo se puede instalar `demo-duracion.user.js` con Tampermonkey (guarda la duración de cada clase que se abre). Con duración, una clase pasa a vista al superar el 95 %.
+Las clases con link de OpenFing pasan a **en progreso** con su minuto. Para que pasen a **vista** hace falta conocer la duración del video, que hoy no se guarda: para la demo se puede instalar `demo-duracion.user.js` con Tampermonkey (guarda la duración de cada clase que se abre). Con duración, una clase pasa a vista al llegar al final del video, y mientras está en progreso muestra el porcentaje visto
 
 > Estos pasos manuales son solo para la demo. Integrado al sitio, el calendario lee el progreso directamente.
 
